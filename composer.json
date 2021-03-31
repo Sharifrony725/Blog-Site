@@ -1,0 +1,10 @@
+{
+    "description": "This is a test project",
+    "keywords": ["php"],
+    "autoload": {
+        "psr-4": {
+            "App\\":"app/"
+  
+              }
+    }
+}
