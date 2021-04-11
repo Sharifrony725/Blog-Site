@@ -1,5 +1,5 @@
 <?php 
-
+ob_start();
 session_start();
 if(!isset($_SESSION['user_id'])){
     echo "<script>window.location.href='login.php';</script>";
@@ -24,6 +24,9 @@ $page = end($page);
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-reset.css" rel="stylesheet">
+    
+    <link href="assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+        <link rel="stylesheet" href="assets/data-tables/DT_bootstrap.css" />
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -31,6 +34,8 @@ $page = end($page);
 
     <!--right slidebar-->
     <link href="css/slidebars.css" rel="stylesheet">
+    <!--  summernote -->
+    <link href="assets/summernote/dist/summernote.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
 
@@ -312,6 +317,19 @@ $page = end($page);
                       </ul>
                   </li>
 
+ <li class="sub-menu">
+                      <a href="javascript:;" <?= $page =='add-blog.php' ? 'class="active" ' : ''?> <?= $page =='manage-blog.php' ? 'class="active" ' : ''?>>
+                          <i class="fa fa-laptop"></i>
+                          <span>Blog</span>
+                      </a>
+                      <ul class="sub">
+                      
+                          <li <?= $page =='add-blog.php' ? 'class="active" ' : ''?>><a  href="add-blog.php">Add Blog</a></li>
+                          <li 
+                          <?= $page =='manage-blog.php' ? 'class="active" ' : ''?>><a  href="manage-blog.php">Manage Blog</a></li>
+                         
+                      </ul>
+                  </li>
                   
                       
                   <!--multi level menu end-->

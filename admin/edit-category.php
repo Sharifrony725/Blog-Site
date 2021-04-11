@@ -2,8 +2,12 @@
 require_once 'header.php';
 require_once '../vendor/autoload.php';
 $category = new \App\classes\Category();
-if(isset($_POST['add-category'])){
-    $insert_msg = $category->addCategory($_POST);
+$id = $_GET['id'];
+$resut = $category->selectRow($id);
+$row = mysqli_fetch_assoc($resut);
+
+if(isset($_POST['update-category'])){
+    $insert_msg = $category->updateCategory($_POST);
 }
 ?>
 
@@ -13,7 +17,7 @@ if(isset($_POST['add-category'])){
 <div class="col-lg-6">
                       <section class="card">
                           <header class="card-header">
-                              Category Add Form 
+                              Category Update Form 
                           </header>
                           <div class="card-body">
                              <?php 
@@ -25,7 +29,8 @@ if(isset($_POST['add-category'])){
                                   <div class="form-group row">
                                       <label for="category_name" class="col-sm-4 col-form-label">Category Name</label>
                                       <div class="col-sm-8">
-                                          <input name="category_name" type="text" class="form-control" id="category_name" placeholder="Category name">
+                                      <input type="hidden" name="id" value="<?= $row['id']?>">
+                                          <input name="category_name" type="text" class="form-control" id="category_name" placeholder="Category name" value="<?= $row['category_name']?>">
                                       </div>
                                   </div>
                            
@@ -34,13 +39,13 @@ if(isset($_POST['add-category'])){
                                           <legend class="col-form-label col-sm-4 pt-0">Status</legend>
                                           <div class="col-sm-8">
                                               <div class="form-check">
-                                                  <input class="form-check-input" type="radio" name="status" id="active" value="1" >
+                                                  <input class="form-check-input" type="radio" name="status" id="active" value="1"<?= $row['status']== '1'? 'checked' : ' '?>  >
                                                   <label class="form-check-label" for="active">
                                                       Active
                                                   </label>
                                               </div>
                                               <div class="form-check">
-                                                  <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
+                                                  <input class="form-check-input" type="radio" name="status" id="inactive" value="0"<?= $row['status']=='0'? 'checked' : ' ' ?>>
                                                   <label class="form-check-label" for="inactive">
                                                       Inactive
                                                   </label>
@@ -52,7 +57,7 @@ if(isset($_POST['add-category'])){
                               
                                   <div class="form-group row">
                                       <div class="col-sm-10">
-                                          <button type="submit" class="btn btn-primary" name="add-category">Save</button>
+                                          <button type="submit" class="btn btn-primary" name="update-category">Update</button>
                                       </div>
                                   </div>
                               </form>
